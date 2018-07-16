@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/votes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="51" />
+
+    <ImageView
+        android:id="@+id/acceptedAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/votes"
+        app:layout_constraintStart_toStartOf="@+id/votes"
+        app:layout_constraintTop_toBottomOf="@id/votes" />
+
+    <TextView
+        android:id="@+id/body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/votes"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@android:string/httpErrorBadUrl" />
+
+    <TextView
+        android:id="@+id/answered_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="@+id/body"
+        app:layout_constraintTop_toBottomOf="@+id/body"
+        tools:text="@tools:sample/date/hhmmss" />
+
+    <ImageView
+        android:id="@+id/authorPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/authorReputation"
+        app:layout_constraintEnd_toStartOf="@+id/authorName"
+        app:layout_constraintTop_toTopOf="@+id/authorName"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/authorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toEndOf="@+id/answered_date"
+        app:layout_constraintTop_toBottomOf="@+id/answered_date"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/authorReputation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="@+id/authorName"
+        app:layout_constraintTop_toBottomOf="@+id/authorName"
+        tools:text="412" />
+
+</android.support.constraint.ConstraintLayout>
