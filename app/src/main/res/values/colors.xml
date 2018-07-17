@@ -6,4 +6,5 @@
 
     <color name="answersColor">#4CAF50</color>
     <color name="votesColor">#9E9E9E</color>
+    <color name="tagsBackgroundColor">#E1ECF4</color>
 </resources>

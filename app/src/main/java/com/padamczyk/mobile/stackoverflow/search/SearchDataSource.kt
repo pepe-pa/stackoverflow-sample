@@ -1,23 +1,30 @@
 package com.padamczyk.mobile.stackoverflow.search
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.padamczyk.mobile.stackoverflow.common.model.Posts
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
+import com.padamczyk.mobile.stackoverflow.common.utils.*
 import okhttp3.ResponseBody
 
 class SearchDataSource(private val api: StackoverflowApi,
-                       private val query: String) : PageKeyedDataSource<Int, Question>() {
+                       private val query: String,
+                       private val loadingState: MutableLiveData<LoadingState>)
+    : PageKeyedDataSource<Int, Question>() {
 
 
     private val TAG = "SearchDataSource"
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Question>) {
-        val response = api.searchQuestions(1, query).execute()
+        loadingState.postValue(InProgress())
+
+        val response = api.searchQuestions(1, query).safeExecute()
         if (response.isSuccessful) {
             response.body()?.let {
+                loadingState.postValue(if (it.items.isEmpty()) Init() else Done())
                 callback.onResult(it.items, 1, 2)
             }
         } else {
@@ -29,7 +36,7 @@ class SearchDataSource(private val api: StackoverflowApi,
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Question>) {
-        val response: Posts<Question>? = api.searchQuestions(params.key, query).execute().body()
+        val response: Posts<Question>? = api.searchQuestions(params.key, query).safeExecute().body()
 
         response?.let {
             callback.onResult(it.items, params.key + 1)
@@ -37,7 +44,7 @@ class SearchDataSource(private val api: StackoverflowApi,
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Question>) {
-        val response: Posts<Question>? = api.searchQuestions(1, query).execute().body()
+        val response: Posts<Question>? = api.searchQuestions(1, query).safeExecute().body()
 
         response?.let {
             callback.onResult(it.items, params.key - 1)
@@ -45,14 +52,14 @@ class SearchDataSource(private val api: StackoverflowApi,
     }
 
 
-
     private fun ResponseBody?.handleError() {
         this?.bytes()?.let {
             var errorJson = String(it)
-            Log.e("tag", errorJson)
-            var error = ObjectMapper().readValue(String(it), Error::class.java)
-            Log.e(TAG, error.message )
-
+            Log.e(TAG, errorJson)
+            var error = ObjectMapper().readValue(String(it), com.padamczyk.mobile.stackoverflow.common.model.Error::class.java)
+            Log.e(TAG, error.error_message)
+            loadingState.postValue(ErrorOccurs(error.error_message))
         }
     }
+
 }

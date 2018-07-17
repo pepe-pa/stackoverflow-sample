@@ -5,19 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?selectableItemBackground"
-    android:padding="8dp"
-    android:focusable="true">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/votes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:minEms="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/votesColor"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="12" />
 
@@ -26,31 +28,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/answersColor"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/answersColor"
         app:layout_constraintEnd_toEndOf="@+id/votes"
         app:layout_constraintStart_toStartOf="@+id/votes"
         app:layout_constraintTop_toBottomOf="@+id/votes"
         tools:text="23" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/questionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/votes"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Sample title" />
+        tools:text="Sample questionTitle" />
 
     <include
+        android:id="@+id/include"
         layout="@layout/author_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintEnd_toEndOf="@id/questionTitle"
+        app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toBottomOf="@id/questionTitle" />
+
+    <TextView
+        android:id="@+id/tagsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/questionTitle"
+        app:layout_constraintTop_toBottomOf="@+id/questionTitle" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>

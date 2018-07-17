@@ -15,6 +15,7 @@ import kotlinx.coroutines.experimental.launch
 class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
     private val query = MutableLiveData<String>()
+    val loadingState = searchRepository.loadingState
 
     val questions: LiveData<PagedList<Question>> = Transformations.switchMap(query) {
         searchRepository.search(it)
@@ -31,7 +32,6 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
             launch {
                 job = launch {
                     delay(500)
-                    Log.i("Job", this.toString() + " run for q: " + queryFilter)
                     if(query.value != queryFilter) {
                         query.postValue(queryFilter)
                     }
@@ -42,4 +42,3 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
     }
 }
-
