@@ -1,5 +1,9 @@
 package com.padamczyk.mobile.stackoverflow.common.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Owner(
         val reputation: Int,
         val user_id: Int,
@@ -7,4 +11,4 @@ data class Owner(
         val profile_image: String?,
         val display_name: String,
         val link: String?
-)
+) : Parcelable

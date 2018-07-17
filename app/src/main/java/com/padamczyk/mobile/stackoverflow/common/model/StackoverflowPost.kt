@@ -1,7 +1,11 @@
 package com.padamczyk.mobile.stackoverflow.common.model
 
-sealed class StackoverflowPost
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+interface StackoverflowPost
+
+@Parcelize
 data class Question(
         var tags: List<String>,
         var owner: Owner,
@@ -19,8 +23,9 @@ data class Question(
         var closed_date: Long,
         var closed_reason: String?,
         var accepted_answer_id: Long
-) : StackoverflowPost()
+) : StackoverflowPost, Parcelable
 
+@Parcelize
 data class Answer(
         var owner: Owner,
         var is_accepted: Boolean,
@@ -28,5 +33,6 @@ data class Answer(
         var last_activity_date: Long,
         var creation_date: Long,
         var answer_id: Int,
-        var question_id: Int
-) : StackoverflowPost()
+        var question_id: Int,
+        var body: String
+) : StackoverflowPost, Parcelable

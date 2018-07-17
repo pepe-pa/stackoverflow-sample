@@ -1,7 +1,7 @@
 package com.padamczyk.mobile.stackoverflow.common.model
 
 data class Error(
-        val error_id: Int,
-        val error_message: String,
-        val error_name: String
+        var error_id: Int = 0,
+        var error_message: String = "",
+        var error_name: String = ""
 )

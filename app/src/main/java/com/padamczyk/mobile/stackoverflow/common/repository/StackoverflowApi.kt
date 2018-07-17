@@ -15,15 +15,15 @@ interface StackoverflowApi {
         const val PAGE_SIZE = 20
     }
 
-    @GET("2.2/answers/{id}?" +
+    @GET("2.2/questions/{id}/answers?" +
             "order=desc&sort=creation&site=stackoverflow&filter=withbody&" +
             "pagesize=$PAGE_SIZE&key=${BuildConfig.STACKOVERFLOW_API_KEY}")
 
-    fun getAnswers(@Query("page") int: Int, @Path("id") questionId: Long):
+    fun getAnswers(@Path("id") questionId: Long, @Query("page") int: Int):
             Call<Posts<Answer>>
 
     @GET("2.2/search/advanced?" +
-            "order=desc&sort=creation&site=stackoverflow&filter=withbody&" +
+            "order=desc&sort=activity&site=stackoverflow&filter=withbody&" +
             "pagesize=$PAGE_SIZE&key=${BuildConfig.STACKOVERFLOW_API_KEY}")
     fun searchQuestions(@Query("page") int: Int, @Query("q") query: String):
             Call<Posts<Question>>
