@@ -46,7 +46,7 @@ class DetailActivity : DaggerAppCompatActivity() {
 
         val question: Question = intent.extras.getParcelable(QUESTION_KEY)
         setFullQuestionView(question)
-        viewModel.fetchAnswers(question.question_id)
+        viewModel.fetchAnswers(question.questionId)
 
         viewModel.answers.observe(this, Observer {
             adapter.submitList(it)
@@ -59,9 +59,9 @@ class DetailActivity : DaggerAppCompatActivity() {
             toolbarTitle.text = title
             bodyTextView.text = body.fromHtml()
             answered_date.text = getString(R.string.asked,
-                    DateUtils.getRelativeTimeSpanString(creation_date.secondsAsMillis()))
-            authorName.text = owner.display_name.fromHtml()
-            owner.profile_image?.let { authorPicture.load(it) }
+                    DateUtils.getRelativeTimeSpanString(creationDate.secondsAsMillis()))
+            authorName.text = owner.displayName.fromHtml()
+            owner.profileImage?.let { authorPicture.load(it) }
             authorReputation.text = "${owner.reputation}"
             tagsLayout.show()
             tagsLayout.text = tags.asSpan(ContextCompat.getColor(

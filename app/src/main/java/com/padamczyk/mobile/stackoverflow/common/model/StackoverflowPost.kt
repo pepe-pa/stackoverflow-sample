@@ -1,38 +1,42 @@
 package com.padamczyk.mobile.stackoverflow.common.model
 
 import android.os.Parcelable
+import com.fasterxml.jackson.annotation.JsonProperty
 import kotlinx.android.parcel.Parcelize
 
-interface StackoverflowPost
+sealed class StackoverflowPost
 
 @Parcelize
 data class Question(
         var tags: List<String>,
         var owner: Owner,
-        var is_answered: Boolean,
-        var view_count: Int,
-        var answer_count: Int,
+        @JsonProperty("is_answered")
+        var isAnswered: Boolean,
+        @JsonProperty("answer_count")
+        var answerCount: Int,
         var score: Int,
-        var last_activity_date: Long,
-        var creation_date: Long,
-        var last_edit_date: Long,
-        var question_id: Long,
+        @JsonProperty("creation_date")
+        var creationDate: Long,
+        @JsonProperty("question_id")
+        var questionId: Long,
         var link: String,
         var title: String,
         var body: String,
-        var closed_date: Long,
-        var closed_reason: String?,
-        var accepted_answer_id: Long
-) : StackoverflowPost, Parcelable
+        @JsonProperty("accepted_answer_id")
+        var acceptedAnswerId: Long
+) : StackoverflowPost(), Parcelable
 
 @Parcelize
 data class Answer(
         var owner: Owner,
-        var is_accepted: Boolean,
+        @JsonProperty("is_accepted")
+        var isAccepted: Boolean,
         var score: Int,
-        var last_activity_date: Long,
-        var creation_date: Long,
-        var answer_id: Int,
-        var question_id: Int,
+        @JsonProperty("creation_date")
+        var creationDate: Long,
+        @JsonProperty("answer_id")
+        var answerId: Int,
+        @JsonProperty("question_id")
+        var questionId: Int,
         var body: String
-) : StackoverflowPost, Parcelable
+) : StackoverflowPost(), Parcelable

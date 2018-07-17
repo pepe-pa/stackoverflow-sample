@@ -31,12 +31,12 @@ class AnswersAdapter : PagedListAdapter<Answer, AnswersAdapter.AnswerViewHolder>
         fun bind(item: Answer?) {
             item?.run {
                 votes.text = "$score"
-                acceptedAnswer.visibility = if (is_accepted) View.VISIBLE else View.INVISIBLE
+                acceptedAnswer.visibility = if (isAccepted) View.VISIBLE else View.INVISIBLE
                 bodyTextView.text = body.fromHtml()
                 answered_date.text = containerView.context.getString(R.string.answered,
-                        DateUtils.getRelativeTimeSpanString(creation_date.secondsAsMillis()))
-                owner.profile_image?.let { authorPicture.load(it) }
-                authorName.text = owner.display_name.fromHtml()
+                        DateUtils.getRelativeTimeSpanString(creationDate.secondsAsMillis()))
+                owner.profileImage?.let { authorPicture.load(it) }
+                authorName.text = owner.displayName.fromHtml()
                 authorReputation.text = "${owner.reputation}"
 
             }

@@ -40,15 +40,15 @@ class QuestionsAdapter(val onClick: (Question) -> Unit) :
                 }
                 questionTitle.text = title.fromHtml()
                 votes.text = "$score"
-                authorName.text = owner.display_name.fromHtml()
+                authorName.text = owner.displayName.fromHtml()
                 authorReputation.text = "${owner.reputation}"
-                with(answer_count) {
+                with(answerCount) {
                     answers.visibility = if (this > 0) View.VISIBLE else View.INVISIBLE
                     answers.text = "${this}"
                 }
                 answered_date.text = containerView.context.getString(R.string.asked,
-                        DateUtils.getRelativeTimeSpanString(creation_date.secondsAsMillis()))
-                owner.profile_image?.let {
+                        DateUtils.getRelativeTimeSpanString(creationDate.secondsAsMillis()))
+                owner.profileImage?.let {
                     authorPicture.load(it)
                 }
 

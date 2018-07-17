@@ -5,7 +5,7 @@ import com.padamczyk.mobile.stackoverflow.common.model.Question
 
 object QuestionDiffItemCallback : DiffUtil.ItemCallback<Question>() {
     override fun areItemsTheSame(oldItem: Question?, newItem: Question?): Boolean {
-        return oldItem?.question_id == newItem?.question_id
+        return oldItem?.questionId== newItem?.questionId
     }
 
     override fun areContentsTheSame(oldItem: Question?, newItem: Question?): Boolean {

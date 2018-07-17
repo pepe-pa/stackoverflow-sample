@@ -58,8 +58,8 @@ class QuestionsDataSource(private val api: StackoverflowApi,
             var errorJson = String(it)
             Log.e(TAG, errorJson)
             var error = ObjectMapper().readValue(String(it), com.padamczyk.mobile.stackoverflow.common.model.Error::class.java)
-            Log.e(TAG, error.error_message)
-            loadingState.postValue(ErrorOccurs(error.error_message))
+            Log.e(TAG, error.errorMessage)
+            loadingState.postValue(ErrorOccurs(error.errorMessage))
         }
     }
 

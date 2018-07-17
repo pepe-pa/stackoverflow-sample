@@ -1,7 +1,12 @@
 package com.padamczyk.mobile.stackoverflow.common.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class Error(
-        var error_id: Int = 0,
-        var error_message: String = "",
-        var error_name: String = ""
+        @JsonProperty("error_id")
+        var errorId: Int = 0,
+        @JsonProperty("error_message")
+        var errorMessage: String = "",
+        @JsonProperty("error_name")
+        var errorName: String = ""
 )
