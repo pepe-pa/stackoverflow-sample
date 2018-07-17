@@ -1,6 +1,7 @@
 package com.padamczyk.mobile.stackoverflow.search
 
 import android.arch.lifecycle.MutableLiveData
+import android.arch.paging.DataSource
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -10,13 +11,13 @@ import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
 import com.padamczyk.mobile.stackoverflow.common.utils.*
 import okhttp3.ResponseBody
 
-class SearchDataSource(private val api: StackoverflowApi,
-                       private val query: String,
-                       private val loadingState: MutableLiveData<LoadingState>)
+class QuestionsDataSource(private val api: StackoverflowApi,
+                          private val query: String,
+                          private val loadingState: MutableLiveData<LoadingState>)
     : PageKeyedDataSource<Int, Question>() {
 
 
-    private val TAG = "SearchDataSource"
+    private val TAG = "QuestionsDataSource"
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Question>) {
         loadingState.postValue(InProgress())
@@ -59,6 +60,18 @@ class SearchDataSource(private val api: StackoverflowApi,
             var error = ObjectMapper().readValue(String(it), com.padamczyk.mobile.stackoverflow.common.model.Error::class.java)
             Log.e(TAG, error.error_message)
             loadingState.postValue(ErrorOccurs(error.error_message))
+        }
+    }
+
+    companion object {
+        fun getFactory(api: StackoverflowApi,
+                       query: String,
+                       loadingState: MutableLiveData<LoadingState>): Factory<Int, Question> {
+            return object : DataSource.Factory<Int, Question>() {
+                override fun create(): DataSource<Int, Question> {
+                    return QuestionsDataSource(api, query, loadingState)
+                }
+            }
         }
     }
 

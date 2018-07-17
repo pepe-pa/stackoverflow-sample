@@ -13,7 +13,8 @@ class SearchRepository(private val stackoverflowApi: StackoverflowApi) {
 
     fun search(queryFilter: String): LiveData<PagedList<Question>> {
         return LivePagedListBuilder(
-                SearchDataSourceFactory(stackoverflowApi, queryFilter, loadingState), StackoverflowApi.PAGE_SIZE).build()
+                QuestionsDataSource.getFactory(stackoverflowApi, queryFilter, loadingState),
+                StackoverflowApi.PAGE_SIZE).build()
     }
 
 

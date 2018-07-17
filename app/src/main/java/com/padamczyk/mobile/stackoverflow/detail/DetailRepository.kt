@@ -10,7 +10,7 @@ import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
 class DetailRepository(private val stackoverflowApi: StackoverflowApi) {
 
     fun getAnswers(questionId: Long): LiveData<PagedList<Answer>> {
-        return LivePagedListBuilder(DetailDataSourceFactory(stackoverflowApi, questionId), 10).build()
+        return LivePagedListBuilder(AnswersDataSource.getFactory(stackoverflowApi, questionId), 10).build()
     }
 
 
