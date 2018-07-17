@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.detail
+package com.padamczyk.mobile.stackoverflow.detail.repository
 
 
 import android.arch.lifecycle.LiveData

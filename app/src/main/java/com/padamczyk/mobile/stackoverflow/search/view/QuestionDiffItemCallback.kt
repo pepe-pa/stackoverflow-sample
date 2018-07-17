@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.search
+package com.padamczyk.mobile.stackoverflow.search.view
 
 import android.support.v7.util.DiffUtil
 import com.padamczyk.mobile.stackoverflow.common.model.Question

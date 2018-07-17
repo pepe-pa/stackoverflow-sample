@@ -1,8 +1,10 @@
-package com.padamczyk.mobile.stackoverflow.detail
+package com.padamczyk.mobile.stackoverflow.detail.di
 
 import android.arch.lifecycle.ViewModelProvider
 import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
 import com.padamczyk.mobile.stackoverflow.common.viewmodel.ViewModelFactory
+import com.padamczyk.mobile.stackoverflow.detail.repository.DetailRepository
+import com.padamczyk.mobile.stackoverflow.detail.viewmodel.DetailViewModel
 import dagger.Module
 import dagger.Provides
 

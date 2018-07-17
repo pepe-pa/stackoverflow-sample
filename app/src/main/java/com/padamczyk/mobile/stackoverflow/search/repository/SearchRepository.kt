@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.search
+package com.padamczyk.mobile.stackoverflow.search.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

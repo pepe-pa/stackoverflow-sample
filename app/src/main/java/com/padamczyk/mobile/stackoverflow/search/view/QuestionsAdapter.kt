@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.search
+package com.padamczyk.mobile.stackoverflow.search.view
 
 import android.arch.paging.PagedListAdapter
 import android.support.v4.content.ContextCompat

@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.search
+package com.padamczyk.mobile.stackoverflow.search.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
 import android.util.Log
 import com.padamczyk.mobile.stackoverflow.common.model.Question
+import com.padamczyk.mobile.stackoverflow.search.repository.SearchRepository
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch

@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.detail
+package com.padamczyk.mobile.stackoverflow.detail.view
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -11,6 +11,7 @@ import android.view.MenuItem
 import com.padamczyk.mobile.stackoverflow.R
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.utils.*
+import com.padamczyk.mobile.stackoverflow.detail.viewmodel.DetailViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.author_layout.*
 import kotlinx.android.synthetic.main.detail_activity.*

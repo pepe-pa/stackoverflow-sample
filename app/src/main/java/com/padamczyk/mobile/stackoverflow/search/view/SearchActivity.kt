@@ -1,4 +1,4 @@
-package com.padamczyk.mobile.stackoverflow.search
+package com.padamczyk.mobile.stackoverflow.search.view
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -11,7 +11,8 @@ import android.util.Log
 import com.padamczyk.mobile.stackoverflow.R
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.utils.*
-import com.padamczyk.mobile.stackoverflow.detail.DetailActivity
+import com.padamczyk.mobile.stackoverflow.detail.view.DetailActivity
+import com.padamczyk.mobile.stackoverflow.search.viewmodel.SearchViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.search_activity.*
 import javax.inject.Inject
