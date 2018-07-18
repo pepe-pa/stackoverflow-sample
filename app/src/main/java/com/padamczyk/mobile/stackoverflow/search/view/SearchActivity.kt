@@ -59,8 +59,8 @@ class SearchActivity : DaggerAppCompatActivity() {
                     status.hide()
                 }
                 is Done -> {
-                    progress.hide()
                     recyclerView.show()
+                    progress.hide()
                     status.hide()
                 }
             }

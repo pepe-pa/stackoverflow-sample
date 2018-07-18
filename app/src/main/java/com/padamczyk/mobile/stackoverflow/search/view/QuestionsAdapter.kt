@@ -45,10 +45,12 @@ class QuestionsAdapter(val onClick: (Question) -> Unit) :
                 if (answerCount > 0) {
                     answers.show()
                     answers.text = "$answerCount"
+                    answersHeader.show()
                     answersHeader.text = containerView.context.resources.
                             getQuantityString(R.plurals.answers, answerCount)
                 } else {
                     answers.hide()
+                    answersHeader.hide()
                 }
                 votes.text = "$score"
                 votesHeader.text = containerView.context.resources.
