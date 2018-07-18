@@ -35,8 +35,10 @@ class SearchActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.search_activity)
 
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener, android.widget.SearchView.OnQueryTextListener {
+        recyclerView.addItemDecoration(
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        )
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
                 return true

@@ -5,7 +5,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.PagedList
-import android.util.Log
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.search.repository.SearchRepository
 import kotlinx.coroutines.experimental.Job
@@ -28,7 +27,6 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         if (!queryFilter.isNullOrEmpty()) {
             job?.run {
                 cancel()
-                Log.i("Job", this.toString() + " is cancel")
             }
             launch {
                 job = launch {
