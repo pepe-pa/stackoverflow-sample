@@ -6,7 +6,7 @@ data class Error(
         @JsonProperty("error_id")
         var errorId: Int = 0,
         @JsonProperty("error_message")
-        var errorMessage: String = "",
+        var errorMessage: String? = "",
         @JsonProperty("error_name")
-        var errorName: String = ""
+        var errorName: String? = ""
 )

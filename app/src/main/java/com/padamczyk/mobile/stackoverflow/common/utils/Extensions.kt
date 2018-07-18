@@ -22,8 +22,8 @@ fun<T> Call<T>.safeExecute(): Response<T> {
         execute()
     } catch (e: Exception) {
 
-        val error = ObjectMapper().
-                writeValueAsString(Error(400, e.localizedMessage, e.cause.toString()))
+        val e = Error(400, e.localizedMessage, e.cause.toString())
+        val error = ObjectMapper().writeValueAsString(e)
 
         Response.error<T>(400,
                 ResponseBody.create(null, error))

@@ -5,6 +5,7 @@ import android.arch.paging.DataSource
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.padamczyk.mobile.stackoverflow.common.model.Error
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
 import com.padamczyk.mobile.stackoverflow.common.utils.*
@@ -22,16 +23,14 @@ class QuestionsDataSource(private val api: StackoverflowApi,
         loadingState.postValue(InProgress())
 
         val response = api.searchQuestions(1, query).safeExecute()
+
         if (response.isSuccessful) {
             response.body()?.let {
                 loadingState.postValue(if (it.items.isEmpty()) Init() else Done())
                 callback.onResult(it.items, 1, 2)
             }
         } else {
-            Log.e("tag", response.raw().code().toString())
-
             response.errorBody().handleError()
-
         }
     }
 
@@ -48,13 +47,12 @@ class QuestionsDataSource(private val api: StackoverflowApi,
 
 
     private fun ResponseBody?.handleError() {
-        this?.bytes()?.let {
-            var errorJson = String(it)
-            Log.e(TAG, errorJson)
-            var error = ObjectMapper().readValue(String(it), com.padamczyk.mobile.stackoverflow.common.model.Error::class.java)
+        this?.string()?.let {
+            Log.e(TAG, it)
+            val error = ObjectMapper().readValue(it, Error::class.java)
             Log.e(TAG, error.errorMessage)
-            loadingState.postValue(ErrorOccurs(error.errorMessage))
-        }
+            loadingState.postValue(ErrorOccurs(error.errorMessage ?: "UNKNOWN ERROR"))
+        } ?: loadingState.postValue(ErrorOccurs("UNKNOWN ERROR"))
     }
 
     companion object {
