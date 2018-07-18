@@ -56,7 +56,7 @@ class DetailActivity : DaggerAppCompatActivity() {
     private fun setFullQuestionView(question: Question) {
         with(question) {
             votes.text = "$score"
-            toolbarTitle.text = title
+            toolbarTitle.text = title.fromHtml()
             bodyTextView.text = body.fromHtml()
             answered_date.text = getString(R.string.asked,
                     DateUtils.getRelativeTimeSpanString(creationDate.secondsAsMillis()))

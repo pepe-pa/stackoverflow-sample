@@ -5,9 +5,9 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.SearchView
-import android.util.Log
 import com.padamczyk.mobile.stackoverflow.R
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.utils.*
@@ -50,25 +50,13 @@ class SearchActivity : DaggerAppCompatActivity() {
         })
 
         viewModel.loadingState.observe(this, Observer {
-            when(it) {
-                is Init -> {
-                    progress.hide()
-                    recyclerView.hide()
-                    status.show()
-                    status.setText(it.text)
-                    status.setCompoundDrawablesWithIntrinsicBounds(0, it.drawable, 0, 0)
-                }
+            when (it) {
+                is Init -> showStatusMessage(it.drawable, getString(it.text))
+                is ErrorOccurs -> showStatusMessage(it.drawable, it.message)
                 is InProgress -> {
                     progress.show()
                     recyclerView.hide()
                     status.hide()
-                }
-                is ErrorOccurs -> {
-                    progress.hide()
-                    recyclerView.hide()
-                    status.show()
-                    status.text = it.message
-                    status.setCompoundDrawablesWithIntrinsicBounds(0, it.drawable, 0, 0)
                 }
                 is Done -> {
                     progress.hide()
@@ -83,13 +71,20 @@ class SearchActivity : DaggerAppCompatActivity() {
         })
     }
 
+    private fun showStatusMessage(@DrawableRes topDrawable: Int, message: String) {
+        progress.hide()
+        recyclerView.hide()
+        status.show()
+        status.setCompoundDrawablesWithIntrinsicBounds(0, topDrawable, 0, 0)
+        status.text = message
+    }
+
     private fun onItemClicked(item: Question) {
-        Log.i("tag", "$item")
         val intent = Intent(this, DetailActivity::class.java)
-        with(Bundle()) {
+
+        intent.putExtras(Bundle().apply {
             putParcelable(DetailActivity.QUESTION_KEY, item)
-            intent.putExtras(this)
-        }
+        })
 
         startActivity(intent)
     }
