@@ -13,8 +13,6 @@
         android:id="@+id/votes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:gravity="center"
         android:minEms="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -22,6 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="12" />
+
+    <TextView
+        android:id="@+id/votesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/votesColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="@+id/votes"
+        app:layout_constraintStart_toStartOf="@+id/votes"
+        app:layout_constraintTop_toBottomOf="@+id/votes" />
 
     <TextView
         android:id="@+id/answers"
@@ -32,8 +40,18 @@
         android:textColor="@color/answersColor"
         app:layout_constraintEnd_toEndOf="@+id/votes"
         app:layout_constraintStart_toStartOf="@+id/votes"
-        app:layout_constraintTop_toBottomOf="@+id/votes"
+        app:layout_constraintTop_toBottomOf="@+id/votesHeader"
         tools:text="23" />
+
+    <TextView
+        android:id="@+id/answersHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/answersColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="@+id/answers"
+        app:layout_constraintStart_toStartOf="@+id/answers"
+        app:layout_constraintTop_toBottomOf="@+id/answers" />
 
     <TextView
         android:id="@+id/questionTitle"
@@ -57,17 +75,20 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintEnd_toEndOf="@id/questionTitle"
         app:layout_constraintStart_toStartOf="@+id/guidelineRight"
-        app:layout_constraintTop_toBottomOf="@id/questionTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tagsLayout" />
 
     <TextView
         android:id="@+id/tagsLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/include"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="@color/tagTextColor"
+        app:layout_constraintEnd_toEndOf="@id/questionTitle"
         app:layout_constraintStart_toStartOf="@+id/questionTitle"
-        app:layout_constraintTop_toBottomOf="@+id/questionTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/questionTitle"
+        tools:text="android mvvm" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guidelineRight"

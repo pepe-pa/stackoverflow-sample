@@ -3,4 +3,5 @@
     <string name="asked">Asked %s</string>
     <string name="answered">Answered %s</string>
     <string name="init_state_text">No content \nStart typing to search</string>
+
 </resources>
