@@ -5,7 +5,6 @@ import android.arch.paging.DataSource
 import android.arch.paging.PageKeyedDataSource
 import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.padamczyk.mobile.stackoverflow.common.model.Posts
 import com.padamczyk.mobile.stackoverflow.common.model.Question
 import com.padamczyk.mobile.stackoverflow.common.repository.StackoverflowApi
 import com.padamczyk.mobile.stackoverflow.common.utils.*
@@ -37,19 +36,14 @@ class QuestionsDataSource(private val api: StackoverflowApi,
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Question>) {
-        val response: Posts<Question>? = api.searchQuestions(params.key, query).safeExecute().body()
 
-        response?.let {
-            callback.onResult(it.items, params.key + 1)
+        api.searchQuestions(params.key, query).safeExecute().takeIf { it.isSuccessful }?.body()?.run {
+            callback.onResult(items, params.key + 1)
         }
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Question>) {
-        val response: Posts<Question>? = api.searchQuestions(1, query).safeExecute().body()
-
-        response?.let {
-            callback.onResult(it.items, params.key - 1)
-        }
+        // Basically for current use case loadBefore method will not be called
     }
 
 
